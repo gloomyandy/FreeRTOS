@@ -78,10 +78,10 @@ task.h is included from an application file. */
 #include "task.h"
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
-
-#if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
-	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
-#endif
+//GA We use this as our general allocator on LPC
+//#if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
+//	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
+//#endif
 
 /* Block sizes must not get too small. */
 #define heapMINIMUM_BLOCK_SIZE	( ( size_t ) ( xHeapStructSize << 1 ) )
@@ -393,7 +393,7 @@ uint8_t *puc;
 	}
 }
 /*-----------------------------------------------------------*/
-
+int initmem = 0;
 void vPortDefineHeapRegions( const HeapRegion_t * const pxHeapRegions )
 {
 BlockLink_t *pxFirstFreeBlockInRegion = NULL, *pxPreviousFreeBlock;
@@ -479,7 +479,7 @@ const HeapRegion_t *pxHeapRegion;
 
 	xMinimumEverFreeBytesRemaining = xTotalHeapSize;
 	xFreeBytesRemaining = xTotalHeapSize;
-
+initmem = xTotalHeapSize;
 	/* Check something was actually defined before it is accessed. */
 	configASSERT( xTotalHeapSize );
 
