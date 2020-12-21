@@ -272,6 +272,21 @@ void *pvReturn = NULL;
 }
 /*-----------------------------------------------------------*/
 
+void *pvPortMallocPermanent( size_t xWantedSize )
+{
+	// Used to allocate memory that will never be freed.
+	if (xWantedSize >= xHeapStructSize)
+		xWantedSize -= xHeapStructSize;
+	void *mem = pvPortMalloc( xWantedSize );
+	if (mem)
+	{
+		mem =  (void *)(((uint8_t *)mem) - xHeapStructSize);
+	}
+	return mem;
+}
+
+/*-----------------------------------------------------------*/
+
 void vPortFree( void *pv )
 {
 uint8_t *puc = ( uint8_t * ) pv;
@@ -393,7 +408,7 @@ uint8_t *puc;
 	}
 }
 /*-----------------------------------------------------------*/
-int initmem = 0;
+
 void vPortDefineHeapRegions( const HeapRegion_t * const pxHeapRegions )
 {
 BlockLink_t *pxFirstFreeBlockInRegion = NULL, *pxPreviousFreeBlock;
@@ -479,7 +494,6 @@ const HeapRegion_t *pxHeapRegion;
 
 	xMinimumEverFreeBytesRemaining = xTotalHeapSize;
 	xFreeBytesRemaining = xTotalHeapSize;
-initmem = xTotalHeapSize;
 	/* Check something was actually defined before it is accessed. */
 	configASSERT( xTotalHeapSize );
 
