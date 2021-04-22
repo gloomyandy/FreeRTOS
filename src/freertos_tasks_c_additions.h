@@ -22,8 +22,8 @@ volatile StackType_t *CheckSPCurrentTaskStack(const uint32_t *stackPointer)
 
 // This is similar to vTaskGetInfo() except that it returns a more detailed task state enumeration.
 // Additionally, if the task is waiting for a resource (e.g. a mutex) then it passes back a pointer to that resource.
-void vTaskGetExtendedInfo( TaskHandle_t xTask, ExtendedTaskStatus_t *pxTaskStatus )
-{
+// Additionally, it clears the run-time counter.
+void vTaskGetExtendedInfo( TaskHandle_t xTask, ExtendedTaskStatus_t *pxTaskStatus ) noexcept{
 TCB_t *pxTCB;
 
 	/* xTask is NULL then get the state of the calling task. */
@@ -47,7 +47,7 @@ TCB_t *pxTCB;
 	#if ( configGENERATE_RUN_TIME_STATS == 1 )
 	{
 		pxTaskStatus->ulRunTimeCounter = pxTCB->ulRunTimeCounter;
-	}
+		pxTCB->ulRunTimeCounter = 0;	}
 	#else
 	{
 		pxTaskStatus->ulRunTimeCounter = 0;
