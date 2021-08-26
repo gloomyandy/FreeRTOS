@@ -47,7 +47,8 @@ TCB_t *pxTCB;
 	#if ( configGENERATE_RUN_TIME_STATS == 1 )
 	{
 		pxTaskStatus->ulRunTimeCounter = pxTCB->ulRunTimeCounter;
-		pxTCB->ulRunTimeCounter = 0;	}
+		pxTCB->ulRunTimeCounter = 0;
+	}
 	#else
 	{
 		pxTaskStatus->ulRunTimeCounter = 0;
