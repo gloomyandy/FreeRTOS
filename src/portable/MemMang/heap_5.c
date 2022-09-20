@@ -78,10 +78,10 @@ task.h is included from an application file. */
 #include "task.h"
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
-//GA We use this as our general allocator on LPC
-//#if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
-//	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
-//#endif
+
+#if( configSUPPORT_DYNAMIC_ALLOCATION == 0 )
+	#error This file must not be used if configSUPPORT_DYNAMIC_ALLOCATION is 0
+#endif
 
 /* Block sizes must not get too small. */
 #define heapMINIMUM_BLOCK_SIZE	( ( size_t ) ( xHeapStructSize << 1 ) )
@@ -270,21 +270,6 @@ void *pvReturn = NULL;
 
 	return pvReturn;
 }
-/*-----------------------------------------------------------*/
-
-void *pvPortMallocPermanent( size_t xWantedSize )
-{
-	// Used to allocate memory that will never be freed.
-	if (xWantedSize >= xHeapStructSize)
-		xWantedSize -= xHeapStructSize;
-	void *mem = pvPortMalloc( xWantedSize );
-	if (mem)
-	{
-		mem =  (void *)(((uint8_t *)mem) - xHeapStructSize);
-	}
-	return mem;
-}
-
 /*-----------------------------------------------------------*/
 
 void vPortFree( void *pv )
@@ -494,6 +479,7 @@ const HeapRegion_t *pxHeapRegion;
 
 	xMinimumEverFreeBytesRemaining = xTotalHeapSize;
 	xFreeBytesRemaining = xTotalHeapSize;
+
 	/* Check something was actually defined before it is accessed. */
 	configASSERT( xTotalHeapSize );
 

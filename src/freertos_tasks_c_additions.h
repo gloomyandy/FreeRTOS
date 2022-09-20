@@ -8,22 +8,12 @@
  */
 
 #include <freertos_task_additions.h>
-#if defined(__LPC17xx__)
-#if (configRECORD_STACK_HIGH_ADDRESS != 1)
-# error configRECORD_STACK_HIGH_ADDRESS must be set to 1
-#endif
-volatile StackType_t *CheckSPCurrentTaskStack(const uint32_t *stackPointer)
-{
-    if(pxCurrentTCB == NULL || stackPointer == NULL) return NULL;
-    if(stackPointer < pxCurrentTCB->pxStack || stackPointer > pxCurrentTCB->pxEndOfStack) return NULL; // stackPointer not in task stack
-    return pxCurrentTCB->pxEndOfStack;
-}
-#endif
 
 // This is similar to vTaskGetInfo() except that it returns a more detailed task state enumeration.
 // Additionally, if the task is waiting for a resource (e.g. a mutex) then it passes back a pointer to that resource.
 // Additionally, it clears the run-time counter.
-void vTaskGetExtendedInfo( TaskHandle_t xTask, ExtendedTaskStatus_t *pxTaskStatus ) noexcept{
+void vTaskGetExtendedInfo( TaskHandle_t xTask, ExtendedTaskStatus_t *pxTaskStatus ) noexcept
+{
 TCB_t *pxTCB;
 
 	/* xTask is NULL then get the state of the calling task. */

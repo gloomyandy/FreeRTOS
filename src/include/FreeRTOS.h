@@ -28,6 +28,19 @@
 #ifndef INC_FREERTOS_H
 #define INC_FREERTOS_H
 
+#ifndef __ECV__
+// We use only a few eCv annotations so instead of including ecv.h we define them here
+# ifndef _ecv_from
+#  define _ecv_from
+# endif
+# ifndef _ecv_array
+#  define _ecv_array
+# endif
+# ifndef _ecv_null
+#  define _ecv_null
+# endif
+#endif
+
 /*
  * Include the generic headers required for the FreeRTOS port being used.
  */
@@ -1147,7 +1160,7 @@ typedef struct xSTATIC_TCB
 		uint32_t 		ulDummy18;
 		uint8_t 		ucDummy19;
 	#endif
-	#if ( tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE != 0 )
+	#if ( tskSTATIC_AND_DYNAMIC_ALLOCATION_POSSIBLE )
 		uint8_t			uxDummy20;
 	#endif
 
