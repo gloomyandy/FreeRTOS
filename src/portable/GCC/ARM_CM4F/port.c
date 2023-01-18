@@ -180,7 +180,7 @@ static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
 #endif /* configASSERT_DEFINED */
 
 /*-----------------------------------------------------------*/
-#ifdef FORCE_ESTACK
+#if FORCE_ESTACK
 extern uint32_t _estack;
 #endif
 
@@ -268,7 +268,7 @@ static void prvPortStartFirstTask( void )
 	would otherwise result in the unnecessary leaving of space in the SVC stack
 	for lazy saving of FPU registers. */
 	__asm volatile(
-#ifdef FORCE_ESTACK
+#if FORCE_ESTACK
 					" ldr r0, =_estack		\n" /* Some bootloaders mess with our stack location */
 #else
 					" ldr r0, =0xE000ED08 	\n" /* Use the NVIC offset register to locate the stack. */
