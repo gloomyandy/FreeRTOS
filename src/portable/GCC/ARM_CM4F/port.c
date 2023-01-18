@@ -180,6 +180,9 @@ static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
 #endif /* configASSERT_DEFINED */
 
 /*-----------------------------------------------------------*/
+#ifdef FORCE_ESTACK
+extern uint32_t _estack;
+#endif
 
 /*
  * See header file for description.
@@ -265,9 +268,13 @@ static void prvPortStartFirstTask( void )
 	would otherwise result in the unnecessary leaving of space in the SVC stack
 	for lazy saving of FPU registers. */
 	__asm volatile(
+#ifdef FORCE_ESTACK
+					" ldr r0, =_estack		\n" /* Some bootloaders mess with our stack location */
+#else
 					" ldr r0, =0xE000ED08 	\n" /* Use the NVIC offset register to locate the stack. */
 					" ldr r0, [r0] 			\n"
 					" ldr r0, [r0] 			\n"
+#endif
 					" msr msp, r0			\n" /* Set the msp back to the start of the stack. */
 					" mov r0, #0			\n" /* Clear the bit that indicates the FPU is in use, see comment above. */
 					" msr control, r0		\n"
