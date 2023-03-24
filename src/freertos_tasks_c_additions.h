@@ -165,4 +165,9 @@ const StackType_t *pxTaskGetCurrentStackBase() noexcept
 	return pxCurrentTCB->pxStack;
 }
 
+// Return the top of stack at the last time the task was swapped out
+const volatile StackType_t *pxTaskGetLastStackTop(TaskHandle_t xTask) noexcept
+{
+	return xTask->pxTopOfStack;
+}
 // End
