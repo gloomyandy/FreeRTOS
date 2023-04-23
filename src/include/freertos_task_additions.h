@@ -44,6 +44,7 @@ void vTaskGetExtendedInfo( TaskHandle_t xTask, ExtendedTaskStatus_t *pxTaskStatu
 eExtendedTaskState eTaskGetExtendedState( TaskHandle_t xTask, const void **pvResource ) noexcept;
 const StackType_t *pxTaskGetCurrentStackBase() noexcept;
 
+const volatile StackType_t *pxTaskGetLastStackTop(TaskHandle_t xTask) noexcept;
 #ifdef __cplusplus
 }
 #endif
