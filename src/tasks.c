@@ -918,9 +918,14 @@ UBaseType_t x;
 		terminator when it is read out. */
 		pxNewTCB->pcTaskName[ 0 ] = 0x00;
 	}
+#if 1	/* DC ported fix from later version */
+    /* This is used as an array index so must ensure it's not too large. */
+    configASSERT( uxPriority < configMAX_PRIORITIES );
 
+#else
 	/* This is used as an array index so must ensure it's not too large.  First
 	remove the privilege bit if one is present. */
+#endif
 	if( uxPriority >= ( UBaseType_t ) configMAX_PRIORITIES )
 	{
 		uxPriority = ( UBaseType_t ) configMAX_PRIORITIES - ( UBaseType_t ) 1U;
@@ -5153,7 +5158,11 @@ TickType_t uxReturn;
 		{
 			/* Return the notification as it was before the bits were cleared,
 			then clear the bit mask. */
+#if 1	// DC bug fix
+			ulReturn = pxTCB->ulNotifiedValue;
+#else
 			ulReturn = pxCurrentTCB->ulNotifiedValue;
+#endif
 			pxTCB->ulNotifiedValue &= ~ulBitsToClear;
 		}
 		taskEXIT_CRITICAL();
