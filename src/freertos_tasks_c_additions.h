@@ -59,7 +59,7 @@ TCB_t *pxTCB;
 }
 
 // This is like xTaskGetState except that it returns an extended status along with the identity of the resource it is waiting for
-eExtendedTaskState eTaskGetExtendedState( TaskHandle_t xTask, const void **pvResource, uint32_t *notifyIndex )
+eExtendedTaskState eTaskGetExtendedState( TaskHandle_t xTask, const void **pvResource, BaseType_t *notifyIndex )
 {
 eExtendedTaskState eReturn;
 List_t const * pxStateList, *pxDelayedList, *pxOverflowedDelayedList;
@@ -95,7 +95,7 @@ const TCB_t * const pxTCB = xTask;
 			else
 			{
 				eReturn = esDelaying;				// assume it is delaying if we don't find that it is waiting for notification
-	            for ( size_t x = ( BaseType_t ) 0; x < ( BaseType_t ) configTASK_NOTIFICATION_ARRAY_ENTRIES; x++ )
+	            for ( BaseType_t x = ( BaseType_t ) 0; x < ( BaseType_t ) configTASK_NOTIFICATION_ARRAY_ENTRIES; x++ )
 	            {
 	                if ( pxTCB->ucNotifyState[ x ] == taskWAITING_NOTIFICATION )
 	                {
