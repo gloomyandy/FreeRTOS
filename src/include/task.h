@@ -511,7 +511,7 @@ typedef enum
                                     void * const pvParameters,
                                     UBaseType_t uxPriority,
                                     StackType_t * const puxStackBuffer,
-                                    StaticTask_t * const pxTaskBuffer ) PRIVILEGED_FUNCTION;
+                                    StaticTask_t * const pxTaskBuffer ) PRIVILEGED_FUNCTION noexcept;
 #endif /* configSUPPORT_STATIC_ALLOCATION */
 
 #if ( ( configSUPPORT_STATIC_ALLOCATION == 1 ) && ( configNUMBER_OF_CORES > 1 ) && ( configUSE_CORE_AFFINITY == 1 ) )
@@ -798,7 +798,7 @@ typedef enum
  * \defgroup vTaskDelete vTaskDelete
  * \ingroup Tasks
  */
-void vTaskDelete( TaskHandle_t xTaskToDelete ) PRIVILEGED_FUNCTION;
+void vTaskDelete( TaskHandle_t xTaskToDelete ) PRIVILEGED_FUNCTION noexcept;
 
 /*-----------------------------------------------------------
 * TASK CONTROL API
@@ -852,7 +852,7 @@ void vTaskDelete( TaskHandle_t xTaskToDelete ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskDelay vTaskDelay
  * \ingroup TaskCtrl
  */
-void vTaskDelay( const TickType_t xTicksToDelay ) PRIVILEGED_FUNCTION;
+void vTaskDelay( const TickType_t xTicksToDelay ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -920,7 +920,7 @@ void vTaskDelay( const TickType_t xTicksToDelay ) PRIVILEGED_FUNCTION;
  * \ingroup TaskCtrl
  */
 BaseType_t xTaskDelayUntil( TickType_t * const pxPreviousWakeTime,
-                            const TickType_t xTimeIncrement ) PRIVILEGED_FUNCTION;
+                            const TickType_t xTimeIncrement ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * vTaskDelayUntil() is the older version of xTaskDelayUntil() and does not
@@ -1013,7 +1013,7 @@ BaseType_t xTaskDelayUntil( TickType_t * const pxPreviousWakeTime,
  * \defgroup uxTaskPriorityGet uxTaskPriorityGet
  * \ingroup TaskCtrl
  */
-UBaseType_t uxTaskPriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
+UBaseType_t uxTaskPriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1023,7 +1023,7 @@ UBaseType_t uxTaskPriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
  *
  * A version of uxTaskPriorityGet() that can be used from an ISR.
  */
-UBaseType_t uxTaskPriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
+UBaseType_t uxTaskPriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1044,7 +1044,7 @@ UBaseType_t uxTaskPriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_FUNC
  * \defgroup uxTaskPriorityGet uxTaskBasePriorityGet
  * \ingroup TaskCtrl
  */
-UBaseType_t uxTaskBasePriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
+UBaseType_t uxTaskBasePriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1054,7 +1054,7 @@ UBaseType_t uxTaskBasePriorityGet( const TaskHandle_t xTask ) PRIVILEGED_FUNCTIO
  *
  * A version of uxTaskBasePriorityGet() that can be used from an ISR.
  */
-UBaseType_t uxTaskBasePriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
+UBaseType_t uxTaskBasePriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1184,7 +1184,7 @@ UBaseType_t uxTaskBasePriorityGetFromISR( const TaskHandle_t xTask ) PRIVILEGED_
  * \ingroup TaskCtrl
  */
 void vTaskPrioritySet( TaskHandle_t xTask,
-                       UBaseType_t uxNewPriority ) PRIVILEGED_FUNCTION;
+                       UBaseType_t uxNewPriority ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1237,7 +1237,7 @@ void vTaskPrioritySet( TaskHandle_t xTask,
  * \defgroup vTaskSuspend vTaskSuspend
  * \ingroup TaskCtrl
  */
-void vTaskSuspend( TaskHandle_t xTaskToSuspend ) PRIVILEGED_FUNCTION;
+void vTaskSuspend( TaskHandle_t xTaskToSuspend ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1288,7 +1288,7 @@ void vTaskSuspend( TaskHandle_t xTaskToSuspend ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskResume vTaskResume
  * \ingroup TaskCtrl
  */
-void vTaskResume( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION;
+void vTaskResume( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1319,7 +1319,7 @@ void vTaskResume( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskResumeFromISR vTaskResumeFromISR
  * \ingroup TaskCtrl
  */
-BaseType_t xTaskResumeFromISR( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskResumeFromISR( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION noexcept;
 
 #if ( configUSE_CORE_AFFINITY == 1 )
 
@@ -1512,7 +1512,7 @@ BaseType_t xTaskResumeFromISR( TaskHandle_t xTaskToResume ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskStartScheduler vTaskStartScheduler
  * \ingroup SchedulerControl
  */
-void vTaskStartScheduler( void ) PRIVILEGED_FUNCTION;
+void vTaskStartScheduler( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1570,7 +1570,7 @@ void vTaskStartScheduler( void ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskEndScheduler vTaskEndScheduler
  * \ingroup SchedulerControl
  */
-void vTaskEndScheduler( void ) PRIVILEGED_FUNCTION;
+void vTaskEndScheduler( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1623,7 +1623,7 @@ void vTaskEndScheduler( void ) PRIVILEGED_FUNCTION;
  * \defgroup vTaskSuspendAll vTaskSuspendAll
  * \ingroup SchedulerControl
  */
-void vTaskSuspendAll( void ) PRIVILEGED_FUNCTION;
+void vTaskSuspendAll( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1679,7 +1679,7 @@ void vTaskSuspendAll( void ) PRIVILEGED_FUNCTION;
  * \defgroup xTaskResumeAll xTaskResumeAll
  * \ingroup SchedulerControl
  */
-BaseType_t xTaskResumeAll( void ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskResumeAll( void ) PRIVILEGED_FUNCTION noexcept;
 
 /*-----------------------------------------------------------
 * TASK UTILITIES
@@ -1696,7 +1696,7 @@ BaseType_t xTaskResumeAll( void ) PRIVILEGED_FUNCTION;
  * \defgroup xTaskGetTickCount xTaskGetTickCount
  * \ingroup TaskUtils
  */
-TickType_t xTaskGetTickCount( void ) PRIVILEGED_FUNCTION;
+TickType_t xTaskGetTickCount( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1714,7 +1714,7 @@ TickType_t xTaskGetTickCount( void ) PRIVILEGED_FUNCTION;
  * \defgroup xTaskGetTickCountFromISR xTaskGetTickCountFromISR
  * \ingroup TaskUtils
  */
-TickType_t xTaskGetTickCountFromISR( void ) PRIVILEGED_FUNCTION;
+TickType_t xTaskGetTickCountFromISR( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1730,7 +1730,7 @@ TickType_t xTaskGetTickCountFromISR( void ) PRIVILEGED_FUNCTION;
  * \defgroup uxTaskGetNumberOfTasks uxTaskGetNumberOfTasks
  * \ingroup TaskUtils
  */
-UBaseType_t uxTaskGetNumberOfTasks( void ) PRIVILEGED_FUNCTION;
+UBaseType_t uxTaskGetNumberOfTasks( void ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1745,7 +1745,7 @@ UBaseType_t uxTaskGetNumberOfTasks( void ) PRIVILEGED_FUNCTION;
  * \defgroup pcTaskGetName pcTaskGetName
  * \ingroup TaskUtils
  */
-char * pcTaskGetName( TaskHandle_t xTaskToQuery ) PRIVILEGED_FUNCTION;
+char * pcTaskGetName( TaskHandle_t xTaskToQuery ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task. h
@@ -1794,7 +1794,7 @@ char * pcTaskGetName( TaskHandle_t xTaskToQuery ) PRIVILEGED_FUNCTION;
 #if ( configSUPPORT_STATIC_ALLOCATION == 1 )
     BaseType_t xTaskGetStaticBuffers( TaskHandle_t xTask,
                                       StackType_t ** ppuxStackBuffer,
-                                      StaticTask_t ** ppxTaskBuffer ) PRIVILEGED_FUNCTION;
+                                      StaticTask_t ** ppxTaskBuffer ) PRIVILEGED_FUNCTION noexcept;
 #endif /* configSUPPORT_STATIC_ALLOCATION */
 
 /**
@@ -1825,7 +1825,7 @@ char * pcTaskGetName( TaskHandle_t xTaskToQuery ) PRIVILEGED_FUNCTION;
  * xTask was created.
  */
 #if ( INCLUDE_uxTaskGetStackHighWaterMark == 1 )
-    UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask ) PRIVILEGED_FUNCTION;
+    UBaseType_t uxTaskGetStackHighWaterMark( TaskHandle_t xTask ) PRIVILEGED_FUNCTION noexcept;
 #endif
 
 /**
@@ -2606,7 +2606,7 @@ BaseType_t xTaskGenericNotify( TaskHandle_t xTaskToNotify,
                                UBaseType_t uxIndexToNotify,
                                uint32_t ulValue,
                                eNotifyAction eAction,
-                               uint32_t * pulPreviousNotificationValue ) PRIVILEGED_FUNCTION;
+                               uint32_t * pulPreviousNotificationValue ) PRIVILEGED_FUNCTION noexcept;
 #define xTaskNotify( xTaskToNotify, ulValue, eAction ) \
     xTaskGenericNotify( ( xTaskToNotify ), ( tskDEFAULT_INDEX_TO_NOTIFY ), ( ulValue ), ( eAction ), NULL )
 #define xTaskNotifyIndexed( xTaskToNotify, uxIndexToNotify, ulValue, eAction ) \
@@ -2759,7 +2759,7 @@ BaseType_t xTaskGenericNotifyFromISR( TaskHandle_t xTaskToNotify,
                                       uint32_t ulValue,
                                       eNotifyAction eAction,
                                       uint32_t * pulPreviousNotificationValue,
-                                      BaseType_t * pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+                                      BaseType_t * pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION noexcept;
 #define xTaskNotifyFromISR( xTaskToNotify, ulValue, eAction, pxHigherPriorityTaskWoken ) \
     xTaskGenericNotifyFromISR( ( xTaskToNotify ), ( tskDEFAULT_INDEX_TO_NOTIFY ), ( ulValue ), ( eAction ), NULL, ( pxHigherPriorityTaskWoken ) )
 #define xTaskNotifyIndexedFromISR( xTaskToNotify, uxIndexToNotify, ulValue, eAction, pxHigherPriorityTaskWoken ) \
@@ -2902,7 +2902,7 @@ BaseType_t xTaskGenericNotifyWait( UBaseType_t uxIndexToWaitOn,
                                    uint32_t ulBitsToClearOnEntry,
                                    uint32_t ulBitsToClearOnExit,
                                    uint32_t * pulNotificationValue,
-                                   TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
+                                   TickType_t xTicksToWait ) PRIVILEGED_FUNCTION noexcept;
 #define xTaskNotifyWait( ulBitsToClearOnEntry, ulBitsToClearOnExit, pulNotificationValue, xTicksToWait ) \
     xTaskGenericNotifyWait( tskDEFAULT_INDEX_TO_NOTIFY, ( ulBitsToClearOnEntry ), ( ulBitsToClearOnExit ), ( pulNotificationValue ), ( xTicksToWait ) )
 #define xTaskNotifyWaitIndexed( uxIndexToWaitOn, ulBitsToClearOnEntry, ulBitsToClearOnExit, pulNotificationValue, xTicksToWait ) \
@@ -3066,7 +3066,7 @@ BaseType_t xTaskGenericNotifyWait( UBaseType_t uxIndexToWaitOn,
  */
 void vTaskGenericNotifyGiveFromISR( TaskHandle_t xTaskToNotify,
                                     UBaseType_t uxIndexToNotify,
-                                    BaseType_t * pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION;
+                                    BaseType_t * pxHigherPriorityTaskWoken ) PRIVILEGED_FUNCTION noexcept;
 #define vTaskNotifyGiveFromISR( xTaskToNotify, pxHigherPriorityTaskWoken ) \
     vTaskGenericNotifyGiveFromISR( ( xTaskToNotify ), ( tskDEFAULT_INDEX_TO_NOTIFY ), ( pxHigherPriorityTaskWoken ) )
 #define vTaskNotifyGiveIndexedFromISR( xTaskToNotify, uxIndexToNotify, pxHigherPriorityTaskWoken ) \
@@ -3172,7 +3172,7 @@ void vTaskGenericNotifyGiveFromISR( TaskHandle_t xTaskToNotify,
  */
 uint32_t ulTaskGenericNotifyTake( UBaseType_t uxIndexToWaitOn,
                                   BaseType_t xClearCountOnExit,
-                                  TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
+                                  TickType_t xTicksToWait ) PRIVILEGED_FUNCTION noexcept;
 #define ulTaskNotifyTake( xClearCountOnExit, xTicksToWait ) \
     ulTaskGenericNotifyTake( ( tskDEFAULT_INDEX_TO_NOTIFY ), ( xClearCountOnExit ), ( xTicksToWait ) )
 #define ulTaskNotifyTakeIndexed( uxIndexToWaitOn, xClearCountOnExit, xTicksToWait ) \
@@ -3236,7 +3236,7 @@ uint32_t ulTaskGenericNotifyTake( UBaseType_t uxIndexToWaitOn,
  * \ingroup TaskNotifications
  */
 BaseType_t xTaskGenericNotifyStateClear( TaskHandle_t xTask,
-                                         UBaseType_t uxIndexToClear ) PRIVILEGED_FUNCTION;
+                                         UBaseType_t uxIndexToClear ) PRIVILEGED_FUNCTION noexcept;
 #define xTaskNotifyStateClear( xTask ) \
     xTaskGenericNotifyStateClear( ( xTask ), ( tskDEFAULT_INDEX_TO_NOTIFY ) )
 #define xTaskNotifyStateClearIndexed( xTask, uxIndexToClear ) \
@@ -3302,7 +3302,7 @@ BaseType_t xTaskGenericNotifyStateClear( TaskHandle_t xTask,
  */
 uint32_t ulTaskGenericNotifyValueClear( TaskHandle_t xTask,
                                         UBaseType_t uxIndexToClear,
-                                        uint32_t ulBitsToClear ) PRIVILEGED_FUNCTION;
+                                        uint32_t ulBitsToClear ) PRIVILEGED_FUNCTION noexcept;
 #define ulTaskNotifyValueClear( xTask, ulBitsToClear ) \
     ulTaskGenericNotifyValueClear( ( xTask ), ( tskDEFAULT_INDEX_TO_NOTIFY ), ( ulBitsToClear ) )
 #define ulTaskNotifyValueClearIndexed( xTask, uxIndexToClear, ulBitsToClear ) \
@@ -3322,7 +3322,7 @@ uint32_t ulTaskGenericNotifyValueClear( TaskHandle_t xTask,
  * \defgroup vTaskSetTimeOutState vTaskSetTimeOutState
  * \ingroup TaskCtrl
  */
-void vTaskSetTimeOutState( TimeOut_t * const pxTimeOut ) PRIVILEGED_FUNCTION;
+void vTaskSetTimeOutState( TimeOut_t * const pxTimeOut ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task.h
@@ -3408,7 +3408,7 @@ void vTaskSetTimeOutState( TimeOut_t * const pxTimeOut ) PRIVILEGED_FUNCTION;
  * \ingroup TaskCtrl
  */
 BaseType_t xTaskCheckForTimeOut( TimeOut_t * const pxTimeOut,
-                                 TickType_t * const pxTicksToWait ) PRIVILEGED_FUNCTION;
+                                 TickType_t * const pxTicksToWait ) PRIVILEGED_FUNCTION noexcept;
 
 /**
  * task.h
@@ -3436,7 +3436,7 @@ BaseType_t xTaskCheckForTimeOut( TimeOut_t * const pxTimeOut,
  * \defgroup xTaskCatchUpTicks xTaskCatchUpTicks
  * \ingroup TaskCtrl
  */
-BaseType_t xTaskCatchUpTicks( TickType_t xTicksToCatchUp ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskCatchUpTicks( TickType_t xTicksToCatchUp ) PRIVILEGED_FUNCTION noexcept;
 
 
 /*-----------------------------------------------------------
@@ -3464,7 +3464,7 @@ BaseType_t xTaskCatchUpTicks( TickType_t xTicksToCatchUp ) PRIVILEGED_FUNCTION;
  *   + Time slicing is in use and there is a task of equal priority to the
  *     currently running task.
  */
-BaseType_t xTaskIncrementTick( void ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskIncrementTick( void ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS AN
@@ -3498,10 +3498,10 @@ BaseType_t xTaskIncrementTick( void ) PRIVILEGED_FUNCTION;
  * period.
  */
 void vTaskPlaceOnEventList( List_t * const pxEventList,
-                            const TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
+                            const TickType_t xTicksToWait ) PRIVILEGED_FUNCTION noexcept;
 void vTaskPlaceOnUnorderedEventList( List_t * pxEventList,
                                      const TickType_t xItemValue,
-                                     const TickType_t xTicksToWait ) PRIVILEGED_FUNCTION;
+                                     const TickType_t xTicksToWait ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS AN
@@ -3516,7 +3516,7 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList,
  */
 void vTaskPlaceOnEventListRestricted( List_t * const pxEventList,
                                       TickType_t xTicksToWait,
-                                      const BaseType_t xWaitIndefinitely ) PRIVILEGED_FUNCTION;
+                                      const BaseType_t xWaitIndefinitely ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS AN
@@ -3542,9 +3542,9 @@ void vTaskPlaceOnEventListRestricted( List_t * const pxEventList,
  * @return pdTRUE if the task being removed has a higher priority than the task
  * making the call, otherwise pdFALSE.
  */
-BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList ) PRIVILEGED_FUNCTION noexcept;
 void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem,
-                                        const TickType_t xItemValue ) PRIVILEGED_FUNCTION;
+                                        const TickType_t xItemValue ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * THIS FUNCTION MUST NOT BE USED FROM APPLICATION CODE.  IT IS ONLY
@@ -3555,7 +3555,7 @@ void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem,
  * that is ready to run.
  */
 #if ( configNUMBER_OF_CORES == 1 )
-    portDONT_DISCARD void vTaskSwitchContext( void ) PRIVILEGED_FUNCTION;
+    portDONT_DISCARD void vTaskSwitchContext( void ) PRIVILEGED_FUNCTION noexcept;
 #else
     portDONT_DISCARD void vTaskSwitchContext( BaseType_t xCoreID ) PRIVILEGED_FUNCTION;
 #endif
@@ -3564,12 +3564,12 @@ void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem,
  * THESE FUNCTIONS MUST NOT BE USED FROM APPLICATION CODE.  THEY ARE USED BY
  * THE EVENT BITS MODULE.
  */
-TickType_t uxTaskResetEventItemValue( void ) PRIVILEGED_FUNCTION;
+TickType_t uxTaskResetEventItemValue( void ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * Return the handle of the calling task.
  */
-TaskHandle_t xTaskGetCurrentTaskHandle( void ) PRIVILEGED_FUNCTION;
+TaskHandle_t xTaskGetCurrentTaskHandle( void ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * Return the handle of the task running on specified core.
@@ -3588,7 +3588,7 @@ void vTaskMissedYield( void ) PRIVILEGED_FUNCTION;
  * Returns the scheduler state as taskSCHEDULER_RUNNING,
  * taskSCHEDULER_NOT_STARTED or taskSCHEDULER_SUSPENDED.
  */
-BaseType_t xTaskGetSchedulerState( void ) PRIVILEGED_FUNCTION;
+BaseType_t xTaskGetSchedulerState( void ) PRIVILEGED_FUNCTION noexcept;
 
 /*
  * Raises the priority of the mutex holder to that of the calling task should
