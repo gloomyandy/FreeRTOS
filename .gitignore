@@ -45,7 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
-.settings/language.settings.xml
+/.settings/
 /SAM3X/
 /SAM4E/
 /SAM4S/
@@ -56,4 +56,6 @@ Temporary Items
 /SAMC21_Debug/
 /SAME51_Debug/
 /RP2040/
+/STM32H523/
+/STM32H743/
 /.clangd
