@@ -102,11 +102,11 @@ extern uint32_t SystemCoreClock;
 #endif
 
 // We currently use the MPU only on the Arm Cortex M7 processors so that we can control caching.
-#define configENABLE_MPU	(defined(__SAME70Q21__) || defined(__SAME70Q20B__) || defined(__SAME70Q21B__) || defined(STM32H743xx))
+#define configENABLE_MPU	(defined(__SAME70Q21__) || defined(__SAME70Q20B__) || defined(__SAME70Q21B__) || defined(__STM32H7__))
 #define configENABLE_FPU	(defined(__SAME51N19A__) || defined(__SAME51G19A__) || defined(__SAME51J19A__) || defined(__SAME54P20A__) \
 								|| defined(__SAME70Q21__) || defined(__SAME70Q20B__) || defined(__SAME70Q21B__) || defined(__SAM4E8E__) \
 								|| defined(__SAMD51N19A__) \
-								|| defined(STM32H523xx) || defined(STM32H743xx))
+								|| defined(__STM32H7__) || defined(__RP2350__))
 
 #ifdef STM32H523xx
 # define portHAS_ARMV8M_MAIN_EXTENSION		1
@@ -621,14 +621,10 @@ extern void vAssertCalled( uint32_t ulLine, const char *pcFile ) noexcept __attr
 
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS standard names. */
 
-#if defined(__RP2040__)
+#if defined(__RP2040__) || defined(__RP2350__)
 #define PendSV_Handler isr_pendsv
 #define SVC_Handler isr_svcall
 #define SysTick_Handler isr_systick
-#elif defined(__RP2350__)
-#define PendSV_Handler isr_pendsv
-#define SVC_Handler isr_svcall
-#define SysTick_Handler isr_systick			// the name used in the Pico sdk
 #else
 #define xPortPendSVHandler PendSV_Handler
 #define vPortSVCHandler SVC_Handler
@@ -636,8 +632,6 @@ extern void vAssertCalled( uint32_t ulLine, const char *pcFile ) noexcept __attr
 #endif
 
 #if defined(__RP2350__)
-#define configENABLE_FPU                        1
-#define configENABLE_MPU                        0
 #define configRUN_FREERTOS_SECURE_ONLY          1
 #endif
 #ifdef __cplusplus
