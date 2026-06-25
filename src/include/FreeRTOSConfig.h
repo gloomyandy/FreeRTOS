@@ -622,9 +622,9 @@ extern void vAssertCalled( uint32_t ulLine, const char *pcFile ) noexcept __attr
 /* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS standard names. */
 
 #if defined(__RP2040__)
-#define xPortPendSVHandler isr_pendsv
-#define vPortSVCHandler isr_svcall
-#define xPortSysTickHandler isr_systick			// the name used in the Pico sdk
+#define PendSV_Handler isr_pendsv
+#define SVC_Handler isr_svcall
+#define SysTick_Handler isr_systick
 #elif defined(__RP2350__)
 #define PendSV_Handler isr_pendsv
 #define SVC_Handler isr_svcall
